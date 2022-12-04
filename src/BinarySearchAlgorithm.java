@@ -7,6 +7,10 @@ public class BinarySearchAlgorithm {
         while (bottomPointer <= topPointer) {
             middle = (bottomPointer + topPointer) / 2;
 
+            if(arr[middle] == null){
+                return -1;
+            }
+
             if (arr[middle].key.compareTo(search) < 0) {
                 bottomPointer = middle + 1;
             } else if (arr[middle].key.compareTo(search) > 0) {

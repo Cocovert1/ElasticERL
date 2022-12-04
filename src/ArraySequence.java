@@ -10,6 +10,8 @@ prevKey: same thing, i-1 (n)
 rangeKey: 2 binary searches that return both index and then subtract it. (log n)
  */
 
+import java.util.Random;
+
 public class ArraySequence {
     class Node {
          String key;
@@ -34,6 +36,7 @@ public class ArraySequence {
 
     Node[] NodeArray;
 
+    // n
     public void initialInsert(String[] sortedArr){
         NodeArray = new Node[sortedArr.length];
         for(int i = 0; i < sortedArr.length; i++){
@@ -41,6 +44,7 @@ public class ArraySequence {
         }
     }
 
+    // n
     public void remove(String key){
         //finds the key
         BinarySearchAlgorithm search = new BinarySearchAlgorithm();
@@ -57,14 +61,19 @@ public class ArraySequence {
         }
 
         for(int k = i; k < NodeArray.length; k++){
+            if(NodeArray[k+1] == null){
+                NodeArray[k] = null;
+                break;
+            }
             if(k == NodeArray.length-1){
                 break;
             }
-            NodeArray[k].key = NodeArray[k+1].key;
+            NodeArray[k] = new Node(NodeArray[k+1].key, 0);
         }
     }
 
-    public void add(String key, int value){
+    // n
+    public void add(String key){
         //checks if key already exists
         BinarySearchAlgorithm search = new BinarySearchAlgorithm();
         if(search.binarySearch(NodeArray, key) != -1){
@@ -73,7 +82,6 @@ public class ArraySequence {
         }
 
         //amortization
-        int end = NodeArray.length;
         if(isFull()) {
             Node[] newNodeArray = new Node[2 * NodeArray.length];
             for (int i = 0; i < NodeArray.length; i++) {
@@ -85,32 +93,45 @@ public class ArraySequence {
 
         int i;
         for(i = 0; i < NodeArray.length; i++){
+            if(NodeArray[i] == null){
+                break;
+            }
             if(NodeArray[i].key.compareTo(key) > 0){
                 break;
             }
         }
 
         //shifts
-        for(int k = end; k >= i; k--){
+        for(int k = NodeArray.length; k >= i; k--){
             if(k == i){
-                NodeArray[k].key = key;
-                NodeArray[k].value = value;
+                NodeArray[k] = new Node(key, 0);
                 break;
             }else {
-                NodeArray[end].key = NodeArray[end-1].key;
+                if(NodeArray[k-1] == null){
+                    continue;
+                }
+                NodeArray[k] = new Node(NodeArray[k-1].key, 0);
             }
         }
     }
 
+    // log n
     public String prev(String key){
         BinarySearchAlgorithm binSearch = new BinarySearchAlgorithm();
         int position = binSearch.binarySearch(NodeArray, key);
+        if((position-1) < 0){
+            return null;
+        }
         return NodeArray[position-1].key;
     }
 
+    // log n
     public String next(String key){
         BinarySearchAlgorithm binSearch = new BinarySearchAlgorithm();
         int position = binSearch.binarySearch(NodeArray, key);
+        if(NodeArray[position+1] == null){
+            return null;
+        }
         return NodeArray[position+1].key;
     }
 
@@ -155,5 +176,22 @@ public class ArraySequence {
             }
         }
         return true;
+    }
+
+    // n
+    public void generate(){
+        Random rnd = new Random();
+        BinarySearchAlgorithm search = new BinarySearchAlgorithm();
+        int n = 100000 + rnd.nextInt(99999999);
+        String key = n + "";
+
+        if(search.binarySearch(NodeArray, key) != -1){
+            System.out.println("Key already exists");
+            generate();
+        } else {
+            add(key);
+        }
+
+
     }
 }

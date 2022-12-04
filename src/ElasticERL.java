@@ -14,6 +14,28 @@ public class ElasticERL {
         System.out.println("Printing the keys");
         allKeys(nbroflines);
 
+        System.out.println("Adding value");
+        add(nbroflines, "12345678");
+        allKeys(nbroflines);
+
+        System.out.println("Removing values");
+        remove(nbroflines, "12345678");
+        allKeys(nbroflines);
+
+        System.out.println("Next key");
+        nextKey(nbroflines,"33240013");
+
+        System.out.println("Previous key");
+        prevKey(nbroflines,"33255593");
+
+        System.out.println("Range of 2 keys");
+        System.out.println(rangeKeys(nbroflines, "33255593", "33240013"));
+
+        System.out.println("Generate random key");
+        sequence.generate();
+        allKeys(nbroflines);
+
+
     }
 
     public static void SetEINThreshold(int nbroflines, String[] arr){
@@ -23,7 +45,7 @@ public class ElasticERL {
 
             sequence.initialInsert(arr);
         } else {
-            data.addData(arr, "EHITS_test_file3.txt");
+            data.addData(arr, "EHITS_test_file2.txt");
 
             for(String s : arr){
                 BST.insert(s);
@@ -34,10 +56,69 @@ public class ElasticERL {
     public static void allKeys(int nbroflines){
         if(nbroflines <= 100000){
             for(ArraySequence.Node n : sequence.NodeArray){
+                if(n == null){
+                    break;
+                }
                 System.out.println(n.key);
             }
         } else {
             BST.inorder();
+        }
+    }
+
+    public static void add(int nbroflines, String key){
+        if(nbroflines <= 100000){
+            sequence.add(key);
+        } else {
+            BST.insert(key);
+        }
+    }
+
+    public static void remove(int nbroflines, String key){
+        if(nbroflines <= 100000){
+            sequence.remove(key);
+        } else {
+            BST.remove(key);
+        }
+    }
+
+    public static void nextKey(int nbroflines, String key){
+        if(nbroflines <= 100000){
+            System.out.println(sequence.next(key));
+        } else {
+
+        }
+    }
+
+    public static void prevKey(int nbroflines, String key){
+        if(nbroflines <= 100000){
+            System.out.println(sequence.prev(key));
+        } else {
+
+        }
+    }
+
+    public static int rangeKeys(int nbroflines, String key1, String key2){
+        if(nbroflines <= 100000){
+            int pos1 = sequence.get(key1);
+            int pos2 = sequence.get(key2);
+
+            if(pos1 > pos2){
+                return pos1 - pos2;
+            }else{
+                return pos2 - pos1;
+            }
+        } else {
+
+        }
+        return -1;
+    }
+
+    public static void generate(int nbroflines){
+        if(nbroflines <= 100000){
+            sequence.generate();
+        } else {
+
         }
     }
 }
