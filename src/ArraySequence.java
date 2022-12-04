@@ -1,18 +1,11 @@
 /*
-setein: just select a number and if its under 10k we choose search table
-generate: idk
-allkeys: just return the array
-add: find the first key value that is bigger, go back one, add the new key and shift (log n for search), (n for shift)
-remove: same thing, shift (log n for search), (n for shift)
-getValues: binary search (log n)
-nextKey: find the key after this one, prob just binary search and then return i+1 (n)
-prevKey: same thing, i-1 (n)
-rangeKey: 2 binary searches that return both index and then subtract it. (log n)
+This is our search table. This is our data Structure for small data sets.
  */
 
 import java.util.Random;
 
 public class ArraySequence {
+    //creating the node class
     class Node {
          String key;
          int value;
@@ -36,7 +29,7 @@ public class ArraySequence {
 
     Node[] NodeArray;
 
-    // n
+    //inserts the original data in the node array
     public void initialInsert(String[] sortedArr){
         NodeArray = new Node[sortedArr.length];
         for(int i = 0; i < sortedArr.length; i++){
@@ -44,7 +37,7 @@ public class ArraySequence {
         }
     }
 
-    // n
+    //removes the key from the sequence
     public void remove(String key){
         //finds the key
         BinarySearchAlgorithm search = new BinarySearchAlgorithm();
@@ -72,7 +65,7 @@ public class ArraySequence {
         }
     }
 
-    // n
+    //adds a key to the sequence
     public void add(String key){
         //checks if key already exists
         BinarySearchAlgorithm search = new BinarySearchAlgorithm();
@@ -115,7 +108,7 @@ public class ArraySequence {
         }
     }
 
-    // log n
+    //finds the previous key in the sequence
     public String prev(String key){
         BinarySearchAlgorithm binSearch = new BinarySearchAlgorithm();
         int position = binSearch.binarySearch(NodeArray, key);
@@ -125,7 +118,7 @@ public class ArraySequence {
         return NodeArray[position-1].key;
     }
 
-    // log n
+    //finds the next key in the sequence
     public String next(String key){
         BinarySearchAlgorithm binSearch = new BinarySearchAlgorithm();
         int position = binSearch.binarySearch(NodeArray, key);
@@ -142,33 +135,7 @@ public class ArraySequence {
         return position;
     }
 
-
-    //returns the key at index
-    public String atIndex(int index){
-        for(int i = 0; i <= index; i++){
-            if(i == index) {
-                return NodeArray[i].key;
-            }
-        }
-        return null;
-    }
-
-
-    public int size(){
-        return NodeArray.length;
-    }
-
-    //checks if empty
-    public boolean isEmpty(){
-        for(int i = 0; i < NodeArray.length; i++){
-            if(NodeArray[i] != null){
-                return false;
-            }
-        }
-
-        return true;
-    }
-
+    //checks if the sequence is full
     public boolean isFull(){
         for(int i = 0; i < NodeArray.length; i++){
             if(NodeArray[i] == null){
@@ -178,7 +145,7 @@ public class ArraySequence {
         return true;
     }
 
-    // n
+    //generates a random key and checks if it can be inputted
     public void generate(){
         Random rnd = new Random();
         BinarySearchAlgorithm search = new BinarySearchAlgorithm();

@@ -1,3 +1,6 @@
+/*
+This is our main ElasticERL algorithm.
+ */
 
 public class ElasticERL {
     static ArraySequence sequence = new ArraySequence();
@@ -6,6 +9,7 @@ public class ElasticERL {
     static BinarySearchTree BST = new BinarySearchTree();
 
     public static void main(String[] args){
+        //testing the different methods.
         int nbroflines = data.nbroflines("EHITS_test_file1.txt");
         String arr[] = new String[nbroflines];
 
@@ -38,6 +42,7 @@ public class ElasticERL {
 
     }
 
+    //selects the correct data structure
     public static void SetEINThreshold(int nbroflines, String[] arr){
         if(nbroflines <= 100000){
             data.addData(arr, "EHITS_test_file1.txt");
@@ -53,6 +58,7 @@ public class ElasticERL {
         }
     }
 
+    //returns all of the keys in a ordered sequence
     public static void allKeys(int nbroflines){
         if(nbroflines <= 100000){
             for(ArraySequence.Node n : sequence.NodeArray){
@@ -66,6 +72,7 @@ public class ElasticERL {
         }
     }
 
+    //add a new key to the data structure
     public static void add(int nbroflines, String key){
         if(nbroflines <= 100000){
             sequence.add(key);
@@ -74,6 +81,7 @@ public class ElasticERL {
         }
     }
 
+    //removes a key from the data structure
     public static void remove(int nbroflines, String key){
         if(nbroflines <= 100000){
             sequence.remove(key);
@@ -82,6 +90,7 @@ public class ElasticERL {
         }
     }
 
+    //finds the next key in the sequence
     public static void nextKey(int nbroflines, String key){
         if(nbroflines <= 100000){
             System.out.println(sequence.next(key));
@@ -90,6 +99,7 @@ public class ElasticERL {
         }
     }
 
+    //finds the previous key in the sequence
     public static void prevKey(int nbroflines, String key){
         if(nbroflines <= 100000){
             System.out.println(sequence.prev(key));
@@ -98,6 +108,7 @@ public class ElasticERL {
         }
     }
 
+    //finds the range between two keys in a sequence
     public static int rangeKeys(int nbroflines, String key1, String key2){
         if(nbroflines <= 100000){
             int pos1 = sequence.get(key1);

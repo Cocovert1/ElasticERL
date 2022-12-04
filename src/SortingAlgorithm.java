@@ -1,11 +1,10 @@
-//we use merge sort is better for bigger data values
-
-import java.io.FileWriter;
-import java.io.IOException;
+/*
+This executes our merge sort for the initial insertion of data into our data structure.
+ */
 
 public class SortingAlgorithm {
 
-    //recursively half the array and then merge them back together
+    //recursively halves the array and then merge them back together
     public static void mergeSort(String[] arr, int first, int sizeArray) {
         int bottomHalf = 0;
         int topHalf = 0;
@@ -21,7 +20,7 @@ public class SortingAlgorithm {
         merge(arr, first, bottomHalf, topHalf);
     }
 
-    //sort them while merging
+    //sort the elements while merging them back
     private static void merge(String[] arr, int first, int bottomHalf, int topHalf)
     {
         //temp array of the size of original arr
@@ -30,6 +29,7 @@ public class SortingAlgorithm {
         int copied1 = 0;
         int copied2 = 0;
 
+        //compares the values of the different elements
         while ((copied1 < bottomHalf) && (copied2 < topHalf))
         {
             if (arr[first + copied1].compareTo(arr[first + bottomHalf + copied2]) < 0)
@@ -49,27 +49,5 @@ public class SortingAlgorithm {
     }
 
 
-//    public static void main(String[] args){
-//        ImportData importData = new ImportData();
-//        int nbroflines = importData.nbroflines("EHITS_test_file1.txt");
-//
-//        String arr[] = new String[nbroflines];
-//
-//        importData.addData(arr, "EHITS_test_file1.txt");
-//
-//        mergeSort(arr, 0, nbroflines);
-//
-//        try {
-//            FileWriter myWriter = new FileWriter("test.txt");
-//            for(int i = 0; i < nbroflines; i++){
-//                myWriter.write(arr[i] + "\n");
-//            }
-//            myWriter.close();
-//            System.out.println("Successfully wrote to the file.");
-//        } catch (IOException e) {
-//            System.out.println("An error occurred.");
-//            e.printStackTrace();
-//        }
-//    }
 }
 
