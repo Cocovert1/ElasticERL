@@ -1,5 +1,4 @@
-import java.io.FileWriter;
-import java.io.IOException;
+//we use merge sort is better for bigger data values
 
 public class SortingAlgorithm {
 
@@ -48,26 +47,26 @@ public class SortingAlgorithm {
 
 
     public static void main(String[] args){
-        ImportData importData = new ImportData();
-        int nbroflines = importData.nbroflines("EHITS_test_file1.txt");
-
-        String arr[] = new String[nbroflines];
-
-        importData.addData(arr, "EHITS_test_file1.txt");
-
-        mergeSort(arr, 0, nbroflines);
-
-        try {
-            FileWriter myWriter = new FileWriter("test.txt");
-            for(int i = 0; i < nbroflines; i++){
-                myWriter.write(arr[i] + "\n");
-            }
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
+//        ImportData importData = new ImportData();
+//        int nbroflines = importData.nbroflines("EHITS_test_file1.txt");
+//
+//        String arr[] = new String[nbroflines];
+//
+//        importData.addData(arr, "EHITS_test_file1.txt");
+//
+//        mergeSort(arr, 0, nbroflines);
+//
+//        try {
+//            FileWriter myWriter = new FileWriter("test.txt");
+//            for(int i = 0; i < nbroflines; i++){
+//                myWriter.write(arr[i] + "\n");
+//            }
+//            myWriter.close();
+//            System.out.println("Successfully wrote to the file.");
+//        } catch (IOException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
     }
 }
 
