@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class BinarySearchTree {
     //Node class to be used by BinarySearchTree, stores values for the tree to hold
     static class Node {
@@ -18,6 +21,7 @@ public class BinarySearchTree {
 
     //Starting point of the tree
     public Node root;
+    public String pre, suc;
 
     //Constructor to build empty BinarySearchTree;
     public BinarySearchTree(){
@@ -106,5 +110,38 @@ public class BinarySearchTree {
             inorderRecursive(root.right);
         }
     }
+
+    public void findSuccessor(String key){
+        findSuccessorRecursive(root, key);
+        System.out.println("Pre: " + pre);
+        System.out.println("Suc: " + suc);
+    }
+
+    public void findSuccessorRecursive(Node root, String key){
+        if (root != null) {
+            if (root.key.compareTo(key) == 0) {
+                if (root.left != null) {
+                    Node t = root.left;
+                    while (t.right != null) {
+                        t = t.right;
+                    }
+                    pre = t.key;
+                }
+                if (root.right != null) {
+                    Node t = root.right;
+                    while (t.left != null) {
+                        t = t.left;
+                    }
+                    suc = t.key;
+                }
+            } else if (root.key.compareTo(key) > 0) {
+                suc = root.key;
+                findSuccessorRecursive(root.left, key);
+            } else if (root.key.compareTo(key) < 0) {
+                pre = root.key;
+                findSuccessorRecursive(root.right, key);
+            }
+        }
+    }
 }
-//
+
