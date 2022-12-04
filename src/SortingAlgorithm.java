@@ -1,5 +1,8 @@
 //we use merge sort is better for bigger data values
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class SortingAlgorithm {
 
     //recursively half the array and then merge them back together
@@ -46,7 +49,7 @@ public class SortingAlgorithm {
     }
 
 
-    public static void main(String[] args){
+//    public static void main(String[] args){
 //        ImportData importData = new ImportData();
 //        int nbroflines = importData.nbroflines("EHITS_test_file1.txt");
 //
@@ -67,6 +70,6 @@ public class SortingAlgorithm {
 //            System.out.println("An error occurred.");
 //            e.printStackTrace();
 //        }
-    }
+//    }
 }
 

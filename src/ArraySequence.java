@@ -15,11 +15,21 @@ public class ArraySequence {
          String key;
          int value;
 
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public void setValue(int value) {
+            this.value = value;
+        }
+
         //node constructor
         public Node(String key, int value){
             this.key = key;
             this.value = value;
         }
+
+
     }
 
     Node[] NodeArray;
@@ -27,7 +37,7 @@ public class ArraySequence {
     public void initialInsert(String[] sortedArr){
         NodeArray = new Node[sortedArr.length];
         for(int i = 0; i < sortedArr.length; i++){
-            NodeArray[i].key = sortedArr[i];
+            NodeArray[i] = new Node(sortedArr[i], 0);
         }
     }
 
