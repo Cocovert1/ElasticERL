@@ -10,7 +10,7 @@ public class ElasticERL {
 
     public static void main(String[] args){
         //testing the different methods.
-        int nbroflines = data.nbroflines("EHITS_test_file1.txt");
+        int nbroflines = data.nbroflines("EHITS_test_file2.txt");
         String arr[] = new String[nbroflines];
 
         SetEINThreshold(nbroflines, arr);
@@ -37,6 +37,7 @@ public class ElasticERL {
 
         System.out.println("Generate random key");
         sequence.generate();
+        BST.generate();
         allKeys(nbroflines);
 
 
@@ -95,7 +96,8 @@ public class ElasticERL {
         if(nbroflines <= 100000){
             System.out.println(sequence.next(key));
         } else {
-
+            BST.findSuccessor(key);
+            System.out.println(BST.suc);
         }
     }
 
@@ -104,7 +106,8 @@ public class ElasticERL {
         if(nbroflines <= 100000){
             System.out.println(sequence.prev(key));
         } else {
-
+            BST.findSuccessor(key);
+            System.out.println(BST.pre);
         }
     }
 
@@ -129,7 +132,8 @@ public class ElasticERL {
         if(nbroflines <= 100000){
             sequence.generate();
         } else {
-
+            String temp = BST.generate();
+            BST.insert(temp);
         }
     }
 }
