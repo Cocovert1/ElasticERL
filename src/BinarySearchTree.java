@@ -1,5 +1,4 @@
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.Random;
 
 public class BinarySearchTree {
     //Node class to be used by BinarySearchTree, stores values for the tree to hold
@@ -19,7 +18,7 @@ public class BinarySearchTree {
         }
     }
 
-    //Starting point of the tree
+    //Starting point of the tree + predecessor and successor for prev and next key
     public Node root;
     public String pre, suc;
 
@@ -28,15 +27,17 @@ public class BinarySearchTree {
         root = null;
     }
 
+    //Search method that calls a recursive search function, used to simplify the call and only look for a key instead of using a root
     public String search(String key){
         root = searchRecursive(root, key);
         if(root != null){
             return key;
         }else{
-            return "Key not found";
+            return "Key does not exist";
         }
     }
 
+    //Recursive search function that looks through a tree and tries finding a matching key
     public Node searchRecursive(Node root, String key){
         if(root == null || root.key.equals(key)){
             return root;
@@ -47,11 +48,12 @@ public class BinarySearchTree {
         return searchRecursive(root.right, key);
     }
 
+    //Insert method to easily insert a key into a tree, omitting duplicates. Does not require root as it calls the recursive insert function
     public void insert(String key){
         root = insertRecursive(root, key);
     }
 
-    //Insert recursively, checking for values
+    //Insert recursively, checking for values and omits duplicates
     public Node insertRecursive(Node root, String key){
         if(root == null){
             root = new Node(key);
@@ -65,10 +67,12 @@ public class BinarySearchTree {
         return root;
     }
 
+    //Remove method that finds a matching key and removes it from the tree, calls recursive remove function
     public void remove(String key){
         root = removeRecursive(root, key);
     }
 
+    //Recursive remove function that checks for 3 cases: if the node has 0 children, 1 child or 2 children
     public Node removeRecursive(Node root, String key){
         if(root == null){
             return root;
@@ -77,7 +81,7 @@ public class BinarySearchTree {
             root.left = removeRecursive(root.left, key);
         }else if(key.compareTo(root.key) > 0){
             root.right = removeRecursive(root.right, key);
-        }else{ //1 Child
+        }else{
             if(root.left == null){
                 return root.right;
             }else if(root.right == null){
@@ -90,6 +94,7 @@ public class BinarySearchTree {
         return root;
     }
 
+    //Finds the minimum value of the tree (all the way to the bottom left of the tree)
     public String min(Node root){
         String minv = root.key;
         while(root.left != null){
@@ -99,10 +104,12 @@ public class BinarySearchTree {
         return minv;
     }
 
+    //Returns all of the keys within the tree in the inorder traversal, calls inorder recursion function
     public void inorder(){
         inorderRecursive(root);
     }
 
+    //Inorder recursion function that goes through all of the nodes (left, root, right) and prints them out
     public void inorderRecursive(Node root){
         if(root != null){
             inorderRecursive(root.left);
@@ -111,12 +118,13 @@ public class BinarySearchTree {
         }
     }
 
+    //Finds both predecessor and successor of a given key, calls findSuccessor recursive
     public void findSuccessor(String key){
         findSuccessorRecursive(root, key);
-        System.out.println("Pre: " + pre);
-        System.out.println("Suc: " + suc);
     }
 
+    //Recursive findSuccessor function that looks for the key's predecessor and successor, looks at 3 different cases:
+    //If the root is null, if the key has a left or right subtree, and if the key is smaller than the node
     public void findSuccessorRecursive(Node root, String key){
         if (root != null) {
             if (root.key.compareTo(key) == 0) {
@@ -142,6 +150,14 @@ public class BinarySearchTree {
                 findSuccessorRecursive(root.right, key);
             }
         }
+    }
+
+    //Generates a number between 10000000 and 99999999 and returns the key
+    public String generate(){
+        Random rnd = new Random();
+        int n = (int) ((Math.random() * (99999999 - 10000000)) + 10000000);
+        String key = n + "";
+        return key;
     }
 }
 
