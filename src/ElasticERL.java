@@ -7,38 +7,46 @@ public class ElasticERL {
     static ImportData data = new ImportData();
     static SortingAlgorithm sort = new SortingAlgorithm();
     static BinarySearchTree BST = new BinarySearchTree();
+    static Stack stack = new Stack(data.nbroflines("EHITS_test_file1.txt"));
 
     public static void main(String[] args){
         //testing the different methods.
-        int nbroflines = data.nbroflines("EHITS_test_file2.txt");
+        int nbroflines = data.nbroflines("EHITS_test_file1.txt");
         String arr[] = new String[nbroflines];
 
         SetEINThreshold(nbroflines, arr);
 
         System.out.println("Printing the keys");
-        allKeys(nbroflines);
+        //allKeys(nbroflines);
 
+        System.out.println();
         System.out.println("Adding value");
         add(nbroflines, "12345678");
-        allKeys(nbroflines);
+       // allKeys(nbroflines);
 
+        System.out.println();
         System.out.println("Removing values");
         remove(nbroflines, "12345678");
-        allKeys(nbroflines);
+       // allKeys(nbroflines);
 
+        System.out.println();
         System.out.println("Next key");
         nextKey(nbroflines,"33240013");
 
+        System.out.println();
         System.out.println("Previous key");
         prevKey(nbroflines,"33255593");
 
+        System.out.println();
         System.out.println("Range of 2 keys");
         System.out.println(rangeKeys(nbroflines, "33255593", "33240013"));
 
+        System.out.println();
         System.out.println("Generate random key");
-        sequence.generate();
+        generate(nbroflines);
         BST.generate();
-        allKeys(nbroflines);
+        //allKeys(nbroflines);
+
 
 
     }
@@ -49,9 +57,17 @@ public class ElasticERL {
             data.addData(arr, "EHITS_test_file1.txt");
             sort.mergeSort(arr, 0, nbroflines);
 
+            for(int i  = 0; i < arr.length; i++){
+                stack.push(arr[i]);
+            }
+
             sequence.initialInsert(arr);
         } else {
             data.addData(arr, "EHITS_test_file2.txt");
+
+            for(int i  = 0; i < arr.length; i++){
+                stack.push(arr[i]);
+            }
 
             for(String s : arr){
                 BST.insert(s);
@@ -77,8 +93,11 @@ public class ElasticERL {
     public static void add(int nbroflines, String key){
         if(nbroflines <= 100000){
             sequence.add(key);
+            stack.push(key);
+
         } else {
             BST.insert(key);
+            stack.push(key);
         }
     }
 
@@ -123,7 +142,7 @@ public class ElasticERL {
                 return pos2 - pos1;
             }
         } else {
-
+            BST.generate();
         }
         return -1;
     }
